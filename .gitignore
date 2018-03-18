@@ -1,10 +1,13 @@
 src/node_modules/*
+!src/node_modules/.gitkeep 
 deps/
 src/deps/*
+!src/deps/.gitkeep 
 deps/node_modules/*
 src/deps/node_modules
 src/onvif
 src/home/.*
+!src/home/.gitkeep 
 src/home/.npm
 src/home/.bash_history
 src/home/.config
