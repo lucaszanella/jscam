@@ -16,17 +16,38 @@ WORKDIR /home/project/src
 RUN curl -fsSL https://deb.nodesource.com/setup_9.x -o get-node.sh  && /bin/sh get-node.sh && rm get-node.sh\
     && apt-get install -y nodejs
 
-RUN npm install -g exp create-proton-app create-react-native-app fb-watchman
+RUN npm install -g exp create-proton-app create-react-native-app fb-watchman react-native-cli
 
-RUN npm i -g npm@4.6.1
+RUN npm i -g npm@4.6.1 #create-react-native-app only works with npm 4
 
-RUN mkdir -p /home/Android/ && cd /home/Android/ && wget --progress=bar:force:noscroll -O sdk.zip $SDK_LINK \
-    && echo "$SDK_HASH sdk.zip" | sha256sum --quiet --check || ( echo 'Corrupt or malicious download' ; exit 1 ) \
-    && unzip sdk.zip && rm sdk.zip 
+EXPOSE 8081
+
+
+ENV ANDROID_HOME /usr/local/android-sdk-linux
+ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+#Experimental, not working yet
+RUN mkdir -p $ANDROID_HOME && cd $ANDROID_HOME && wget --progress=bar:force:noscroll -O sdk.zip $SDK_LINK \
+    && echo "$SDK_HASH sdk.zip" | sha256sum --quiet --check || ( echo 'Corrupt or malicious download, aborting' ; exit 1 ) \
+    && unzip sdk.zip && rm sdk.zip \
+    && export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools \
+    && chgrp -R users $ANDROID_HOME \
+    && chmod -R 0775 $ANDROID_HOME
+
+#ENV PATH $PATH:$ANDROID_HOME/build-tools/23.0.1
+
+#RUN (while true ; do sleep 5; echo y; done) | --no-ui --force --all --filter \
+# platform-tools,android-26,build-tools-27.0.3,extra-android-support,\
+# extra-android-m2repository,sys-img-x86_64-android-26,extra-google-m2repository
+
+
+RUN mkdir -p /home/project/gradle_deps
+ENV GRADLE_USER_HOME /home/project/gradle_deps
 
 COPY entrypoint.sh /my_entrypoint.sh
 
-#RUN sudo sysctl -w kern.maxfiles=5242880 && sudo sysctl -w kern.maxfilesperproc=524288
+RUN echo kern.maxfiles=5242880 | tee -a /etc/sysctl.conf \
+    && echo kern.maxfilesperproc=524288 | tee -a /etc/sysctl.conf
 
 #RUN mkdir -p /home/deps && cd /home/deps
 

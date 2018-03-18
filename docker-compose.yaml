@@ -3,6 +3,9 @@ version: '3'
 services:
   jscam:
     build: ./dev
+#    sysctls:
+#      - kern.maxfiles=5242880
+#      - kern.maxfilesperproc=524288
     image: jscam
     stdin_open: true
     tty: true
