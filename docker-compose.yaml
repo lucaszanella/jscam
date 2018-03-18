@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  jscam:
+    build: ./dev
+    image: jscam
+    stdin_open: true
+    tty: true
+    entrypoint: /bin/bash
+#    restart: unless-stopped
+#    ports:
+#      - "127.0.0.1:9091:9091"
+    volumes:
+     - "./src:/home/project/src"
+     - "./src/node_modules:/home/project/src/node_modules"
+     - "./src/deps:/home/project/src/deps"
+     - "/etc/group:/etc/group:ro"
+     - "/etc/sudoers:/etc/sudoers:ro"
+     - "/etc/shadow:/etc/shadow:ro"
+     - "/etc/passwd:/etc/passwd:ro"
