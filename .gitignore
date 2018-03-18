@@ -11,4 +11,4 @@ src/home/.*
 src/home/.npm
 src/home/.bash_history
 src/home/.config
-src/package_lock.json
+src/package-lock.json
