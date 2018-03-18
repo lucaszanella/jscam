@@ -12,3 +12,6 @@ src/home/.npm
 src/home/.bash_history
 src/home/.config
 src/package-lock.json
+src/jscam/node_modules
+src/jscam/package-lock.json
+
