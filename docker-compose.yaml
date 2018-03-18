@@ -6,7 +6,7 @@ services:
     image: jscam
     stdin_open: true
     tty: true
-    entrypoint: /bin/bash
+    #entrypoint: /my_entrypoint.sh
     network_mode: "host"
     privileged: true
 #    restart: unless-stopped
