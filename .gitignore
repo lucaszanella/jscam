@@ -1,11 +1,9 @@
-src/node_modules/
-node_modules/
+src/node_modules/*
 deps/
 src/deps/*
 deps/node_modules/*
 src/deps/node_modules
 src/onvif
-src/\.*
 src/home/.*
 src/home/.npm
 src/home/.bash_history
