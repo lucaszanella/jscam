@@ -20,10 +20,9 @@ RUN npm install -g exp create-proton-app create-react-native-app fb-watchman
 
 RUN npm i -g npm@4.6.1
 
-RUN wget --progress=bar:force:noscroll -O /home/Android/sdk.zip $SDK_LINK \
-    && echo "$SDK_HASH /home/Android/sdk.zip" | sha256sum --quiet --check || ( echo 'Corrupt or malicious download' ; exit 1 ) \
-    && unziip /home/Android/sdk.zip
-
+RUN mkdir -p /home/Android/ && cd /home/Android/ && wget --progress=bar:force:noscroll -O sdk.zip $SDK_LINK \
+    && echo "$SDK_HASH sdk.zip" | sha256sum --quiet --check || ( echo 'Corrupt or malicious download' ; exit 1 ) \
+    && unzip sdk.zip && rm sdk.zip 
 
 COPY entrypoint.sh /my_entrypoint.sh
 
