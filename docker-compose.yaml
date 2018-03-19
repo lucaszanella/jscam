@@ -16,8 +16,8 @@ services:
 #    ports:
 #      - "127.0.0.1:9091:9091"
     volumes:
-     - "./src:/home/project/src"
-     - "./src/node_modules:/home/project/src/node_modules"
+     - "./src/jscam:/home/project/src/jscam"
+     - "./src/node_modules:/home/project/src/jscam/node_modules"
      - "./src/deps:/home/project/src/deps"
      - "/etc/group:/etc/group:ro"
      - "/etc/sudoers:/etc/sudoers:ro"

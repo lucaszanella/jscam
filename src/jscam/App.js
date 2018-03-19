@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+//const crypto = require('crypto');
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <Text>Hello World</Text>
-        <Text>live edit 5</Text>
+        <Text>live edit 7</Text>
       </View>
     );
   }
@@ -22,3 +23,4 @@ const styles = StyleSheet.create({
 });
 
 console.log('hey');
+//console.log(crypto.createDiffieHellman(256));

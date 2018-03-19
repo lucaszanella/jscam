@@ -16,7 +16,7 @@ WORKDIR /home/project/src
 RUN curl -fsSL https://deb.nodesource.com/setup_9.x -o get-node.sh  && /bin/sh get-node.sh && rm get-node.sh\
     && apt-get install -y nodejs
 
-RUN npm install -g exp create-proton-app create-react-native-app fb-watchman react-native-cli
+RUN npm install -g exp create-proton-app create-react-native-app fb-watchman react-native-cli npm3
 
 RUN npm i -g npm@4.6.1 #create-react-native-app only works with npm 4
 

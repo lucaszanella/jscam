@@ -9,6 +9,7 @@
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
+    "postinstall": "rm -rf onvif && git clone https://github.com/lucaszanella/onvif && npm install onvif && npm3 install node-libs-browser",
     "start": "react-native-scripts start",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
