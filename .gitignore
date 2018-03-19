@@ -1,10 +1,12 @@
 src/node_modules/*
 !src/node_modules/.gitkeep 
+src/jscam/node_modules/*
+!src/jscam/node_modules/.gitkeep
+src/jscam/.expo
+src/jscam/onvif
 deps/
 src/deps/*
 !src/deps/.gitkeep 
-deps/node_modules/*
-src/deps/node_modules
 src/onvif
 src/home/.*
 !src/home/.gitkeep 
@@ -14,4 +16,3 @@ src/home/.config
 src/package-lock.json
 src/jscam/node_modules
 src/jscam/package-lock.json
-

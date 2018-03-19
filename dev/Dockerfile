@@ -40,15 +40,19 @@ RUN mkdir -p $ANDROID_HOME && cd $ANDROID_HOME && wget --progress=bar:force:nosc
 # platform-tools,android-26,build-tools-27.0.3,extra-android-support,\
 # extra-android-m2repository,sys-img-x86_64-android-26,extra-google-m2repository
 
-
 RUN mkdir -p /home/project/gradle_deps
 ENV GRADLE_USER_HOME /home/project/gradle_deps
 
 COPY entrypoint.sh /my_entrypoint.sh
 
 RUN echo kern.maxfiles=5242880 | tee -a /etc/sysctl.conf \
-    && echo kern.maxfilesperproc=524288 | tee -a /etc/sysctl.conf
+    && echo kern.maxfilesperproc=524288 | tee -a /etc/sysctl.conf \
+    && echo fs.inotify.max_user_watches=10000 | tee -a /etc/sysctl.conf \
+    && echo fs.inotify.max_user_instances=1024 | tee -a /etc/sysctl.conf \
+    && echo fs.inotify.max_user_watches=12288 | tee -a /etc/sysctl.conf
 
 #RUN mkdir -p /home/deps && cd /home/deps
+
+WORKDIR /home/project/src/jscam
 
 ENTRYPOINT "/bin/bash"
