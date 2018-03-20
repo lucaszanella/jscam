@@ -1,6 +1,6 @@
 'use strict';
 
-const blacklist = require('react-native/packager/blacklist');
+//const blacklist = require('react-native/packager/blacklist');
 
 module.exports = {
 
@@ -53,7 +53,8 @@ module.exports = {
     const additionalBlacklist = [
       /ignore-this-directory\/.*/,
     ];
-    return blacklist(additionalBlacklist);
+    //return blacklist(additionalBlacklist);
+    return []
   },
 
   /**

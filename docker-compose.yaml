@@ -1,20 +1,16 @@
 version: '3'
 
 services:
-  jscam:
-    build: ./dev
-#    sysctls:
-#      - kern.maxfiles=5242880
-#      - kern.maxfilesperproc=524288
+  dev:
+    build:
+      context: ./dev
+      dockerfile: Dockerfile.dev
     image: jscam
     stdin_open: true
     tty: true
     #entrypoint: /my_entrypoint.sh
     network_mode: "host"
-    privileged: true
-#    restart: unless-stopped
-#    ports:
-#      - "127.0.0.1:9091:9091"
+    privileged: false
     volumes:
      - "./src/jscam:/home/project/src/jscam"
      - "./src/node_modules:/home/project/src/jscam/node_modules"
@@ -23,3 +19,4 @@ services:
      - "/etc/sudoers:/etc/sudoers:ro"
      - "/etc/shadow:/etc/shadow:ro"
      - "/etc/passwd:/etc/passwd:ro"
+
