@@ -16,3 +16,13 @@ src/home/.config
 src/package-lock.json
 src/jscam/node_modules
 src/jscam/package-lock.json
+src/jscam/.expo
+src/jscam/android/.gradle
+src/jscam/android/.idea
+src/jscam/android/build
+src/jscam/android/app/build
+src/jscam/android/gradle
+.idea
+local.properties
+src/jscam/android/app/app.iml
+src/jscam/android/jscam.iml

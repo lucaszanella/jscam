@@ -7,7 +7,8 @@ ARG SDK_HASH=444e22ce8ca0f67353bda4b85175ed3731cae3ffa695ca18119cbacef1c1bea0
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-    curl git wget libgtk-3-dev build-essential ca-certificates sudo unzip openjdk-8-jdk openjdk-8-jre
+    curl git wget libgtk-3-dev build-essential ca-certificates sudo unzip openjdk-8-jdk openjdk-8-jre \
+    lib32stdc++6 lib32z1
 
 RUN echo "root:123" | chpasswd
     
@@ -20,8 +21,8 @@ RUN npm install -g exp create-proton-app create-react-native-app fb-watchman rea
 
 RUN npm i -g npm@4.6.1 #create-react-native-app only works with npm 4
 
-ENV ANDROID_HOME /usr/local/android-sdk-linux
-ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+#ENV ANDROID_HOME /usr/local/android-sdk-linux
+#ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
 #Experimental, not working yet
 #RUN mkdir -p $ANDROID_HOME && cd $ANDROID_HOME && wget --progress=bar:force:noscroll -O sdk.zip $SDK_LINK \
@@ -42,9 +43,6 @@ ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 #    echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter extra-android-m2repository && \
 #    echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter extra-google-google_play_services && \
 #    echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter extra-google-m2repository
-
-RUN mkdir -p /home/project/gradle_deps
-ENV GRADLE_USER_HOME /home/project/gradle_deps
 
 COPY entrypoint.sh /my_entrypoint.sh
 
