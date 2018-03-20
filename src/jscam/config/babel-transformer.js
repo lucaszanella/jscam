@@ -30,6 +30,7 @@ const babelRC = {
                 pbkdf2: 'react-native-pbkdf2-shim',
                 querystring: 'querystring-es3',
                 stream: 'stream-browserify',
+                dgram: 'react-native-dgram-shim',
                 _stream_duplex: 'readable-stream/duplex',
                 _stream_passthrough: 'readable-stream/passthrough',
                 _stream_readable: 'readable-stream/readable',

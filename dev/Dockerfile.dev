@@ -21,8 +21,8 @@ RUN npm install -g exp create-proton-app create-react-native-app fb-watchman rea
 
 RUN npm i -g npm@4.6.1 #create-react-native-app only works with npm 4
 
-#ENV ANDROID_HOME /usr/local/android-sdk-linux
-#ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+ENV ANDROID_HOME /home/Android/Sdk
+ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
 #Experimental, not working yet
 #RUN mkdir -p $ANDROID_HOME && cd $ANDROID_HOME && wget --progress=bar:force:noscroll -O sdk.zip $SDK_LINK \
@@ -32,7 +32,7 @@ RUN npm i -g npm@4.6.1 #create-react-native-app only works with npm 4
 #    && chgrp -R users $ANDROID_HOME \
 #    && chmod -R 0775 $ANDROID_HOME
 
-#ENV PATH $PATH:$ANDROID_HOME/build-tools/23.0.1
+ENV PATH $PATH:$ANDROID_HOME/build-tools/23.0.1
 
 #RUN echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter android-${ANDROID_COMPILE_SDK} && \
 #    echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter android-25 && \
@@ -45,6 +45,8 @@ RUN npm i -g npm@4.6.1 #create-react-native-app only works with npm 4
 #    echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter extra-google-m2repository
 
 COPY entrypoint.sh /my_entrypoint.sh
+
+RUN chmod +x /my_entrypoint.sh
 
 #RUN echo kern.maxfiles=5242880 | tee -a /etc/sysctl.conf \
 #    && echo kern.maxfilesperproc=524288 | tee -a /etc/sysctl.conf \

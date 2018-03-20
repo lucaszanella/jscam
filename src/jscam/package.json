@@ -13,7 +13,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "test": "node node_modules/jest/bin/jest.js",
-    "clean": "rm -rf node_modules/* onvif"
+    "clean": "rm -rf node_modules/* onvif &&  rm -rf $TMPDIR/react-* && watchman watch-del-all | echo 'watchman not a problem, continuing...' && npm cache clean"
   },
   "jest": {
     "preset": "react-native"
@@ -21,6 +21,11 @@
   "dependencies": {
     "react": "16.2.0",
     "react-native": "0.52.0",
-    "babel-plugin-rewrite-require": "1.9.0"
+    "babel-plugin-rewrite-require": "1.9.0",
+    "react-native-crypto": "2.1.2",
+    "react-native-randombytes": "3.0.0",
+    "stream-http":"2.8.1",
+    "pbkdf2":"wswoodruff/react-native-pbkdf2-shim",
+    "react-native-dgram-shim": "lucaszanella/react-native-dgram-shim"
   }
 }

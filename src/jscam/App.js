@@ -1,5 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+//const http = require('http');
+//const cam = require('onvif').Cam;
+
+//import {Cam} from 'onvif/lib/onvif_react';
+import {Cam} from 'onvif';
+
+
 //const crypto = require('crypto');
 export default class App extends React.Component {
   render() {
