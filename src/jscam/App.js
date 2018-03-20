@@ -6,7 +6,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Text>Hello World</Text>
-        <Text>live edit 7</Text>
+        <Text>live edit 8</Text>
       </View>
     );
   }
