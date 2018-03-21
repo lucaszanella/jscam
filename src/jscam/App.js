@@ -4,9 +4,8 @@ import { StyleSheet, Text, View } from 'react-native';
 //const cam = require('onvif').Cam;
 
 //import {Cam} from 'onvif/lib/onvif_react';
-import {Cam} from 'onvif';
-
-
+//import onvif from 'onvif/lib/onvif';
+import crypto from './node_modules/onvif/lib/cam.js'
 //const crypto = require('crypto');
 export default class App extends React.Component {
   render() {
