@@ -1,5 +1,7 @@
 src/node_modules/*
 !src/node_modules/.gitkeep 
+dev/node_modules/*
+!dev/node_modules/.gitkeep 
 src/jscam/node_modules/*
 !src/jscam/node_modules/.gitkeep
 src/jscam/.expo
