@@ -1,59 +1,48 @@
-FROM ubuntu:bionic
+FROM debian:jessie
 
-MAINTAINER Lucas Zanella (me@lucaszanella.com)
+ENV ANDROID_COMPILE_SDK "23"
+ENV ANDROID_BUILD_TOOLS "23.0.1"
+#ENV ANDROID_SDK_TOOLS "26.1.1"
+#ENV SDK_LINK https://dl.google.com/android/android-sdk_r${ANDROID_SDK_TOOLS}-linux.tgz
+ENV SDK_LINK "https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip"
+ENV SDK_HASH "444e22ce8ca0f67353bda4b85175ed3731cae3ffa695ca18119cbacef1c1bea0"
 
-ARG SDK_LINK=https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
-ARG SDK_HASH=444e22ce8ca0f67353bda4b85175ed3731cae3ffa695ca18119cbacef1c1bea0
+ENV ANDROID_HOME=$PWD/android-sdk-linux
+ENV PATH=$PATH:$PWD/android-sdk-linux/platform-tools/
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    curl git wget libgtk-3-dev build-essential ca-certificates sudo unzip openjdk-8-jdk openjdk-8-jre \
-    lib32stdc++6 lib32z1
+RUN apt-get update && apt-get install -y curl
 
-RUN echo "root:123" | chpasswd
-    
-WORKDIR /home/project/src
+RUN echo 'deb http://http.debian.net/debian jessie-backports main' >> /etc/apt/sources.list
+RUN curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh && \
+    bash nodesource_setup.sh
 
-RUN curl -fsSL https://deb.nodesource.com/setup_9.x -o get-node.sh  && /bin/sh get-node.sh && rm get-node.sh\
-    && apt-get install -y nodejs
+RUN apt-get update
+RUN apt-get install -t jessie-backports -y openjdk-8-jdk
+RUN apt-get install -y nodejs \
+                       sudo \
+                       wget \
+                       tar \
+                       unzip \
+                       lib32stdc++6 \
+                       lib32z1 \
+    && apt-get clean
 
-RUN npm install -g exp create-proton-app create-react-native-app fb-watchman react-native-cli npm3
+RUN npm install -g react-native-cli yarn && npm cache clean -g 
 
-RUN npm i -g npm@4.6.1 #create-react-native-app only works with npm 4
+#RUN yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses &&            \
+#    $ANDROID_HOME/tools/bin/sdkmanager  "build-tools;23.0.2"          \
+#                                        "build-tools;25.0.2"          \
+#                                        "cmake;3.6.4111459"           \
+#                                        "ndk-bundle"                  \
+#                                        "platform-tools"              \
+#                                        "platforms;android-23"        \
+#                                        "build-tools;23.0.1"          \
+#                                        "build-tools;26.0.1"          \
+#                                        "build-tools;26.0.2"          \
+#                                        "extras;android;m2repository" \
+#                                        "extras;google;m2repository"  \
+#                                        --verbose 
 
-ENV ANDROID_HOME /home/Android/Sdk
-ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+RUN apt-get update && apt-get install -y git
 
-#Experimental, not working yet
-#RUN mkdir -p $ANDROID_HOME && cd $ANDROID_HOME && wget --progress=bar:force:noscroll -O sdk.zip $SDK_LINK \
-#    && echo "$SDK_HASH sdk.zip" | sha256sum --quiet --check || ( echo 'Corrupt or malicious download, aborting' ; exit 1 ) \
-#    && unzip sdk.zip && rm sdk.zip \
-#    && export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools \
-#    && chgrp -R users $ANDROID_HOME \
-#    && chmod -R 0775 $ANDROID_HOME
-
-ENV PATH $PATH:$ANDROID_HOME/build-tools/23.0.1
-
-#RUN echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter android-${ANDROID_COMPILE_SDK} && \
-#    echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter android-25 && \
-#    echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter platform-tools && \
-#    echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter build-tools-${ANDROID_BUILD_TOOLS} && \
-#    echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter build-tools-25.0.2 && \
-#    echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter build-tools-23.0.3 && \
-#    echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter extra-android-m2repository && \
-#    echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter extra-google-google_play_services && \
-#    echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter extra-google-m2repository
-
-COPY entrypoint.sh /my_entrypoint.sh
-
-RUN chmod +x /my_entrypoint.sh
-
-#RUN echo kern.maxfiles=5242880 | tee -a /etc/sysctl.conf \
-#    && echo kern.maxfilesperproc=524288 | tee -a /etc/sysctl.conf \
-#    && echo fs.inotify.max_user_watches=10000 | tee -a /etc/sysctl.conf \
-#    && echo fs.inotify.max_user_instances=1024 | tee -a /etc/sysctl.conf \
-#    && echo fs.inotify.max_user_watches=12288 | tee -a /etc/sysctl.conf
-
-WORKDIR /home/project/src/jscam
-
-ENTRYPOINT "/bin/bash"
+ENV ANDROID_NDK $ANDROID_HOME/ndk-bundle

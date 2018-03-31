@@ -1,10 +1,11 @@
 version: '3'
 
 services:
-  dev:
+  jscam:
     build:
-      context: ./dev
+      context: .
       dockerfile: Dockerfile.dev
+    working_dir: /home/project/src/jscam
     image: jscam
     stdin_open: true
     tty: true
@@ -12,11 +13,11 @@ services:
     network_mode: "host"
     privileged: false
     volumes:
-     - "./src/jscam:/home/project/src/jscam"
-     - "./src/node_modules:/home/project/src/jscam/node_modules"
-     - "./src/deps:/home/project/src/deps"
+     - "../src/jscam:/home/project/src/jscam"
+     - "./node_modules:/home/project/src/jscam/node_modules"
      - "/etc/group:/etc/group:ro"
      - "/etc/sudoers:/etc/sudoers:ro"
      - "/etc/shadow:/etc/shadow:ro"
      - "/etc/passwd:/etc/passwd:ro"
+     - "/tmp/.X11-unix:/tmp/.X11-unix"
 

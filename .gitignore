@@ -9,7 +9,9 @@ src/deps/*
 !src/deps/.gitkeep 
 src/onvif
 src/home/.*
-!src/home/.gitkeep 
+!src/home/.gitkeep
+dev/home/.*
+!dev/home/.gitkeep 
 src/home/.npm
 src/home/.bash_history
 src/home/.config
