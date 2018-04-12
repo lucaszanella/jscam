@@ -10,6 +10,17 @@ import { StyleSheet, Text, View } from 'react-native';
 
 const onvif = require('onvif');
 
+cam = new onvif.Cam({
+  hostname: '192.168.1.155',
+  username: 'admin',
+  password: '888888',
+  port:'10080'
+}, function(err) {
+  this.getStreamUri({protocol:'RTSP'}, function(err, stream) {
+    console.log(stream.uri);
+  })
+});
+
 export default class App extends React.Component {
   render() {
     return (
