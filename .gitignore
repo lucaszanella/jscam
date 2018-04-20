@@ -1,3 +1,4 @@
+JRTPLIB/
 src/node_modules/*
 !src/node_modules/.gitkeep 
 dev/node_modules/*
