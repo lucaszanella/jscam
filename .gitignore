@@ -32,3 +32,4 @@ local.properties
 src/jscam/android/app/app.iml
 src/jscam/android/jscam.iml
 src/jscam/cameras.js
+src/jscam/android/app/.externalNativeBuild/*

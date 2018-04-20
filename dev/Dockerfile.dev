@@ -47,8 +47,10 @@ RUN npm install -g react-native-cli yarn && npm cache clean -g
 #                                        "build-tools;26.0.2"          \
 #                                        "extras;android;m2repository" \
 #                                        "extras;google;m2repository"  \
+#                                        "ndk-bundle"                  \
 #                                        --verbose 
 
 RUN apt-get update && apt-get install -y git
 
 ENV ANDROID_NDK $ANDROID_HOME/ndk-bundle
+ENV ANDROID_NDK_HOME $ANDROID_NDK
