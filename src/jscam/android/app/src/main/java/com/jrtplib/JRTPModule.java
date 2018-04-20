@@ -24,6 +24,14 @@ public class JRTPModule extends ReactContextBaseJavaModule {
   public String getName() {
     return "JRTPModule";
   }
+
+  @Override
+  public Map<String, Object> getConstants() {
+    final Map<String, Object> constants = new HashMap<>();
+    constants.put(DURATION_SHORT_KEY, Toast.LENGTH_SHORT);
+    constants.put(DURATION_LONG_KEY, Toast.LENGTH_LONG);
+    return constants;
+  }
   
   @ReactMethod
   public void show(String message, int duration) {
