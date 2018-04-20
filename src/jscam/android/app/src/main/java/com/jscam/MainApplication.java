@@ -7,6 +7,7 @@ import com.peel.react.TcpSocketsModule;
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.jrtplib.JRTPPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
@@ -26,7 +27,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new TcpSocketsModule(),
-            new RandomBytesPackage()
+            new RandomBytesPackage(),
+            new JRTPPackage()
       );
     }
 

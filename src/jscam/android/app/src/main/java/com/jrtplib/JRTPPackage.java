@@ -1,4 +1,4 @@
-package com.facebook.react.modules.toast;
+package com.jrtplib;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class JRTPLIBPackage implements ReactPackage {
+public class JRTPPackage implements ReactPackage {
 
   @Override
   public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {

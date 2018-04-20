@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import JRTP from './JRTPLIB';
 
-JRTP.show('Awesome');
+JRTP.show('Awesome', JRTP.SHORT);
 //const http = require('http');
 //const cam = require('onvif').Cam;
 

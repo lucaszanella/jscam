@@ -1,4 +1,4 @@
-package com.facebook.react.modules.toast;
+package com.jrtplib;
 
 import android.widget.Toast;
 
