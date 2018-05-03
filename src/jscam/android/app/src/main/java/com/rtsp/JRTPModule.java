@@ -10,6 +10,7 @@ import com.facebook.react.bridge.ReactMethod;
 
 import java.util.Map;
 import java.util.HashMap;
+import android.util.Log;
 
 public class JRTPModule extends ReactContextBaseJavaModule {
 
@@ -36,5 +37,7 @@ public class JRTPModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void show(String message, int duration) {
     Toast.makeText(getReactApplicationContext(), message, duration).show();
+    Log.v("test", RtspInterface.helloWorld());
+    
   }
 }

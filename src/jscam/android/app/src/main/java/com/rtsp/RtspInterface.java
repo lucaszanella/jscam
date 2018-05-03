@@ -2,11 +2,7 @@ package com.rtsp;
 
 public class RtspInterface {
 
-    /* A native method that is implemented by the
-     * 'hello-jni' native library, which is packaged
-     * with this application.
-     */
-    public native String HelloWorld();
+    public static native String helloWorld();
 
     /* This is another native method declaration that is *not*
      * implemented by 'hello-jni'. This is simply to show that
@@ -20,12 +16,7 @@ public class RtspInterface {
      */
     //public native String  unimplementedStringFromJNI();
 
-    /* this is used to load the 'hello-jni' library on application
-     * startup. The library has already been unpacked into
-     * /data/data/com.example.hellojni/lib/libhello-jni.so at
-     * installation time by the package manager.
-     */
     static {
-        System.loadLibrary("libMyRtspClient");
+        System.loadLibrary("myRtspClient");
     }
 }

@@ -7,7 +7,7 @@ import com.peel.react.TcpSocketsModule;
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.jrtplib.JRTPPackage;
+import com.rtsp.JRTPPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
