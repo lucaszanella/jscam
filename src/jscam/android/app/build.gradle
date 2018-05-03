@@ -106,11 +106,13 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        /*
         externalNativeBuild {
             cmake {
                 arguments "-DFORCE_RTP_SUPPORT_IFADDRS_FALSE=TRUE"
             }
         }
+        */
     }
 
     // Encapsulates your external native build configurations.
@@ -119,7 +121,8 @@ android {
         // Encapsulates your CMake build configurations.
         cmake {
             // Provides a relative path to your CMake build script.
-            path "../../JRTPLIB/CMakeLists.txt"
+            //path "../../JRTPLIB/CMakeLists.txt"
+            path "../../myRtspClient/myRtspClient/CMakeLists.txt"
         }
     }
 
