@@ -1,4 +1,4 @@
-package com.jrtplib;
+package com.rtsp;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
