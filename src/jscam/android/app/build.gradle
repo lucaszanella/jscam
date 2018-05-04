@@ -122,7 +122,8 @@ android {
         cmake {
             // Provides a relative path to your CMake build script.
             //path "../../JRTPLIB/CMakeLists.txt"
-            path "../../myRtspClient/myRtspClient/CMakeLists.txt"
+            //path "../../myRtspClient/myRtspClient/CMakeLists.txt"
+            path "src/main/cpp/CMakeLists.txt"
         }
     }
 

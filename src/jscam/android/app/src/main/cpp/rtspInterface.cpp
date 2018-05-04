@@ -4,6 +4,6 @@
 
 extern "C" JNIEXPORT jstring JNICALL Java_com_rtsp_RtspInterface_helloWorld(
     JNIEnv *env, jobject thiz) {
-
-   return (*env)->NewStringUTF(env, "Hello from JNI !");
+    std::string hello = "Hello from C++";
+   return env->NewStringUTF(hello.c_str());
 }

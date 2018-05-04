@@ -38,6 +38,7 @@ public class JRTPModule extends ReactContextBaseJavaModule {
   public void show(String message, int duration) {
     Toast.makeText(getReactApplicationContext(), message, duration).show();
     Log.v("test", RtspInterface.helloWorld());
-    
+    Toast.makeText(getReactApplicationContext(), RtspInterface.helloWorld(), duration).show();
+
   }
 }

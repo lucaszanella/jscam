@@ -18,5 +18,6 @@ public class RtspInterface {
 
     static {
         System.loadLibrary("myRtspClient");
+        System.loadLibrary("rtspInterface");
     }
 }
