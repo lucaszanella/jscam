@@ -13,12 +13,13 @@ ENV PATH=$PATH:$PWD/android-sdk-linux/platform-tools/
 RUN apt-get update && apt-get install -y curl
 
 RUN echo 'deb http://http.debian.net/debian jessie-backports main' >> /etc/apt/sources.list
-RUN curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh && \
+RUN curl -sL https://deb.nodesource.com/setup_9.x -o nodesource_setup.sh && \
     bash nodesource_setup.sh
 
 RUN apt-get update
 RUN apt-get install -t jessie-backports -y openjdk-8-jdk
 RUN apt-get install -y nodejs \
+                       git \
                        sudo \
                        wget \
                        tar \
@@ -27,7 +28,7 @@ RUN apt-get install -y nodejs \
                        lib32z1 \
     && apt-get clean
 
-RUN npm install -g react-native-cli yarn && npm cache clean -g 
+RUN npm install -g react-native-cli yarn
 
 #CMAKE INSTALLATION (android sdk has older versions, but if you need newer...)
 #RUN git clone https://github.com/Kitware/CMake \
@@ -49,8 +50,6 @@ RUN npm install -g react-native-cli yarn && npm cache clean -g
 #                                        "extras;google;m2repository"  \
 #                                        "ndk-bundle"                  \
 #                                        --verbose 
-
-RUN apt-get update && apt-get install -y git
 
 ENV ANDROID_NDK $ANDROID_HOME/ndk-bundle
 ENV ANDROID_NDK_HOME $ANDROID_NDK

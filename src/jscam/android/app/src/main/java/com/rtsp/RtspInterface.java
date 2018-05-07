@@ -3,6 +3,8 @@ package com.rtsp;
 public class RtspInterface {
 
     public static native String helloWorld();
+    public static native String rtspInit(String uri);
+
 
     /* This is another native method declaration that is *not*
      * implemented by 'hello-jni'. This is simply to show that

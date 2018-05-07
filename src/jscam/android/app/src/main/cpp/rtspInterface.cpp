@@ -17,17 +17,18 @@ extern "C" JNIEXPORT jstring JNICALL Java_com_rtsp_RtspInterface_helloWorld(JNIE
    return env->NewStringUTF(hello.c_str());
 }
 
-extern "C" JNIEXPORT jstring JNICALL Java_com_rtsp_RtspInterface_rtspInit(JNIEnv *env, jobject thiz, jstring address) {
-    __android_log_print(ANDROID_LOG_WARN, "rtspInterface.cpp", "Starting RTSP describe operation");
+extern "C" JNIEXPORT void JNICALL Java_com_rtsp_RtspInterface_rtspInit(JNIEnv *env, jobject thiz, jstring address) {
+    //__android_log_print(ANDROID_LOG_INFO, "rtspInterface.cpp", "Starting RTSP describe operation %d", 0);
     
-    string RtspUri(env->GetStringUTFChars(address, 0));
+    //string RtspUri(env->GetStringUTFChars(address, 0));
 	// string RtspUri("rtsp://192.168.81.145/ansersion");
-	RtspClient Client;
+	//RtspClient Client;
 
 	/* Set up rtsp server resource URI */
-	Client.SetURI(RtspUri);
+	//Client.SetURI(RtspUri);
 	
 	/* Send DESCRIBE command to server */
-	Client.DoDESCRIBE();
+	//int r = Client.DoDESCRIBE();
+    //__android_log_print(ANDROID_LOG_WARN, "rtspInterface.cpp", "DoDESCRIBE error %d", r);
 
 }

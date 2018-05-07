@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import JRTP from './JRTPLIB';
 
 JRTP.show('Awesome', JRTP.SHORT);
+JRTP.rtspInit('rtsp://192.168.1.165:10554');
 //const http = require('http');
 //const cam = require('onvif').Cam;
 

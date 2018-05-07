@@ -7,8 +7,9 @@
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "16.2.0"
   },
+  
   "scripts": {
-    "postinstall": "rm -rf onvif && git clone https://github.com/lucaszanella/onvif && npm install \"file:onvif\" && git clone https://github.com/lucaszanella/JRTPLIB",
+    "postinstall": "rm -rf onvif && git clone https://github.com/lucaszanella/onvif && npm install onvif/ && rm -rf JRTPLIB && git clone https://github.com/lucaszanella/JRTPLIB && rm -rf react-native-video && git clone https://github.com/lucaszanella/react-native-video && npm install react-native-video/",
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
