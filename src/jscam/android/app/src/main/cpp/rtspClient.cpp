@@ -22,7 +22,9 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 
 #include "liveMedia.hh"
 #include "BasicUsageEnvironment.hh"
-#include "H264VideoRTPSink.hh"
+#include "MyH264VideoRTPSink.hh"
+
+//#include "MyH264VideoRTPSink.hh"
 
 // Forward function definitions:
 
@@ -64,8 +66,8 @@ void usage(UsageEnvironment& env, char const* progName) {
 */
 char eventLoopWatchVariable = 0;
 
-//int main(int argc, char** argv) {
-int rtspStart(){
+int main(int argc, char** argv) {
+//int rtspStart(){
   // Begin by setting up our usage environment:
   TaskScheduler* scheduler = BasicTaskScheduler::createNew();
   UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
@@ -79,9 +81,9 @@ int rtspStart(){
   */
 
   // There are argc-1 URLs: argv[1] through argv[argc-1].  Open and start streaming each one:
-  //for (int i = 1; i <= argc-1; ++i) {
+  for (int i = 1; i <= argc-1; ++i) {
     openURL(*env, argv[0], argv[i]);
-  //}
+  }
 
   // All subsequent activity takes place within the event loop:
   env->taskScheduler().doEventLoop(&eventLoopWatchVariable);
