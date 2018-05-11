@@ -20,11 +20,15 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 // client application.  For a full-featured RTSP client application - with much more functionality, and many options - see
 // "openRTSP": http://www.live555.com/openRTSP/
 
+/*
+clear && export LIVE555=../../../../../live555 && export H264LIB=../../../../../h264bitstream && g++ rtspClient.cpp  -I . -I $LIVE555/liveMedia/include -I $LIVE555/liveMedia -I $LIVE555/groupsock/include -I $LIVE555/UsageEnvironment/include -I $LIVE555/BasicUsageEnvironment/include -I $H264LIB $LIVE555/liblive555.so $H264LIB/libh264bitstream.so -o rtspClient
+*/
+
 #include "liveMedia.hh"
 #include "BasicUsageEnvironment.hh"
-#include "MyH264VideoRTPSink.hh"
-
-//#include "MyH264VideoRTPSink.hh"
+//#include "h264_avcc.h"
+//#include "h264_sei.h"
+#include "h264_stream.h"
 
 // Forward function definitions:
 
@@ -58,27 +62,23 @@ UsageEnvironment& operator<<(UsageEnvironment& env, const MediaSubsession& subse
   return env << subsession.mediumName() << "/" << subsession.codecName();
 }
 
-/*
 void usage(UsageEnvironment& env, char const* progName) {
   env << "Usage: " << progName << " <rtsp-url-1> ... <rtsp-url-N>\n";
   env << "\t(where each <rtsp-url-i> is a \"rtsp://\" URL)\n";
 }
-*/
+
 char eventLoopWatchVariable = 0;
 
 int main(int argc, char** argv) {
-//int rtspStart(){
   // Begin by setting up our usage environment:
   TaskScheduler* scheduler = BasicTaskScheduler::createNew();
   UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
 
   // We need at least one "rtsp://" URL argument:
-  /*
   if (argc < 2) {
     usage(*env, argv[0]);
     return 1;
   }
-  */
 
   // There are argc-1 URLs: argv[1] through argv[argc-1].  Open and start streaming each one:
   for (int i = 1; i <= argc-1; ++i) {
@@ -142,7 +142,6 @@ public:
 // Or it might be a "FileSink", for outputting the received data into a file (as is done by the "openRTSP" application).
 // In this example code, however, we define a simple 'dummy' sink that receives incoming data, but does nothing with it.
 
-/*
 class DummySink: public MediaSink {
 public:
   static DummySink* createNew(UsageEnvironment& env,
@@ -170,7 +169,7 @@ private:
   MediaSubsession& fSubsession;
   char* fStreamId;
 };
-*/
+
 #define RTSP_CLIENT_VERBOSITY_LEVEL 1 // by default, print verbose output from each "RTSPClient"
 
 static unsigned rtspClientCount = 0; // Counts how many streams (i.e., "RTSPClient"s) are currently in use.
@@ -292,7 +291,7 @@ void continueAfterSETUP(RTSPClient* rtspClient, int resultCode, char* resultStri
     // (This will prepare the data sink to receive data; the actual flow of data from the client won't start happening until later,
     // after we've sent a RTSP "PLAY" command.)
 
-    scs.subsession->sink = MyH264VideoRTPSink::createNew(env, *scs.subsession, rtspClient->url());
+    scs.subsession->sink = DummySink::createNew(env, *scs.subsession, rtspClient->url());
       // perhaps use your own custom "MediaSink" subclass instead
     if (scs.subsession->sink == NULL) {
       env << *rtspClient << "Failed to create a data sink for the \"" << *scs.subsession
@@ -473,13 +472,13 @@ StreamClientState::~StreamClientState() {
   }
 }
 
+
 // Implementation of "DummySink":
 
 // Even though we're not going to be doing anything with the incoming data, we still need to receive it.
 // Define the size of the buffer that we'll use:
 #define DUMMY_SINK_RECEIVE_BUFFER_SIZE 100000
 
-/*
 DummySink* DummySink::createNew(UsageEnvironment& env, MediaSubsession& subsession, char const* streamId) {
   return new DummySink(env, subsession, streamId);
 }
@@ -501,14 +500,24 @@ void DummySink::afterGettingFrame(void* clientData, unsigned frameSize, unsigned
   DummySink* sink = (DummySink*)clientData;
   sink->afterGettingFrame(frameSize, numTruncatedBytes, presentationTime, durationInMicroseconds);
 }
-*/
-// If you don't want to see debugging output for each received frame, then comment out the following line:
-#define DEBUG_PRINT_EACH_RECEIVED_FRAME 1
 
-//void DummySink::afterGettingFrame(unsigned frameSize, unsigned numTruncatedBytes,
-//				  struct timeval presentationTime, unsigned /*durationInMicroseconds*/) {
+// If you don't want to see debugging output for each received frame, then comment out the following line:
+#//define DEBUG_PRINT_EACH_RECEIVED_FRAME 1
+
+void DummySink::afterGettingFrame(unsigned frameSize, unsigned numTruncatedBytes,
+				  struct timeval presentationTime, unsigned /*durationInMicroseconds*/) {
+
+  int nal_start, nal_end;
+  uint8_t* buf;
+  int len;
+  // read some H264 data into fReceiveBuffer
+  h264_stream_t* h = h264_new();
+  find_nal_unit(fReceiveBuffer, len, &nal_start, &nal_end);
+  read_nal_unit(h, &fReceiveBuffer[nal_start], nal_end - nal_start);
+  debug_nal(h,h->nal);
+
+
   // We've just received a frame of data.  (Optionally) print out information about it:
-/*
 #ifdef DEBUG_PRINT_EACH_RECEIVED_FRAME
   if (fStreamId != NULL) envir() << "Stream \"" << fStreamId << "\"; ";
   envir() << fSubsession.mediumName() << "/" << fSubsession.codecName() << ":\tReceived " << frameSize << " bytes";
@@ -538,4 +547,3 @@ Boolean DummySink::continuePlaying() {
                         onSourceClosure, this);
   return True;
 }
-*/
