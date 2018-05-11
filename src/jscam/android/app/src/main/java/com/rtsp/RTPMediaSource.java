@@ -15,12 +15,20 @@ import android.os.Handler;
 import android.provider.MediaStore;
 
 public class RTPMediaSource extends BaseMediaSource implements MediaSource{
-
+/*
     public RTPMediaSource(Uri uri, DataSource.Factory dataSourceFactory, ExtractorsFactory extractorsFactory, Handler eventHandler, ExtractorMediaSource.EventListener eventListener)  {
         super(uri, dataSourceFactory, extractorsFactory, eventHandler, eventListener);
     }
+*/
+    protected void 	prepareSourceInternal(ExoPlayer player, boolean isTopLevelSource) {
 
-    public void 	addEventListener(Handler handler, MediaSourceEventListener eventListener) {
+    }
+
+    protected  void 	releaseSourceInternal() {
+
+    }
+
+    public void 	maybeThrowSourceInfoRefreshError() {
 
     }
 
@@ -28,12 +36,8 @@ public class RTPMediaSource extends BaseMediaSource implements MediaSource{
 
     }
 
-    public void 	prepareSource(ExoPlayer player, boolean isTopLevelSource, MediaSource.SourceInfoRefreshListener listener) {
-
-    }
-
     public void 	releasePeriod(MediaPeriod mediaPeriod) {
-        
+
     }
 
 }
