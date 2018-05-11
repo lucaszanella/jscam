@@ -123,7 +123,7 @@ android {
             // Provides a relative path to your CMake build script.
             //path "../../JRTPLIB/CMakeLists.txt"
             //path "../../myRtspClient/myRtspClient/CMakeLists.txt"
-            path "src/main/cpp/CMakeLists.txt"
+            //path "src/main/cpp/CMakeLists.txt"
         }
     }
 
@@ -163,6 +163,7 @@ dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
+    compile 'com.google.android.exoplayer:exoplayer:2.8.0'
 }
 
 // Run this once to be able to run the application with BUCK
